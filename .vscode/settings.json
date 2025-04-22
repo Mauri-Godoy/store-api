@@ -1,0 +1,44 @@
+{
+  "workbench.iconTheme": "helium-icon-theme",
+  "editor.formatOnSave": true,
+  "window.zoomLevel": -1,
+  "editor.fontFamily": "'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Ubuntu Mono', 'monospace', monospace, 'Droid Sans Mono'",
+  "editor.tabSize": 4,
+  "terminal.integrated.fontSize": 13,
+  "editor.fontSize": 15,
+  "workbench.sideBar.location": "left",
+  "editor.minimap.enabled": true,
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "files.autoSave": "onWindowChange",
+  "git.autofetch": true,
+  "workbench.colorTheme": "One Dark Pro",
+  "peacock.color": "#6DB33F",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#88c75e",
+    "activityBar.background": "#88c75e",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#4273bd",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#88c75e",
+    "statusBar.background": "#6db33f",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#568d32",
+    "statusBarItem.remoteBackground": "#6db33f",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#6db33f",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#6db33f99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "java.compile.nullAnalysis.mode": "automatic",
+  "maven.terminal.favorites": [
+    {
+      "command": "clean compile package",
+      "debug": false
+    }
+  ]
+}
