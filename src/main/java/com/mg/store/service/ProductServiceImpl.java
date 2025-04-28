@@ -20,9 +20,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() {
         productRepository.saveAll(Arrays.asList(
-                new Product(1, "Product1", "Description1", 100.0, 10, "Category1"),
-                new Product(2, "Product2", "Description2", 200.0, 20, "Category2"),
-                new Product(3, "Product3", "Description3", 300.0, 30, "Category3")));
+                new Product(null, "Product1", "Description1", 100.0, 10, "Category1"),
+                new Product(null, "Product2", "Description2", 200.0, 20, "Category2"),
+                new Product(null, "Product3", "Description3", 300.0, 30, "Category3")));
+
+        Product newProduct = new Product();
+        newProduct.setName("Product4");
+        newProduct.setDescription("Description4");
+        productRepository.save(newProduct);
+
         return productRepository.findAll().stream()
                 .map(product -> ProductMapper.INSTANCE.tDto(product))
                 .toList();
