@@ -40,5 +40,10 @@
       "command": "clean compile package",
       "debug": false
     }
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+  "java.errors.incompleteClasspath.severity": "warning"
 }

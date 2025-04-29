@@ -6,4 +6,6 @@ import com.mg.store.dto.ProductDto;
 
 public interface ProductService {
     List<ProductDto> getAllProducts();
+
+    void insertProducts();
 }
