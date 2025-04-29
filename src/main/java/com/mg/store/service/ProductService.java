@@ -5,7 +5,7 @@ import java.util.List;
 import com.mg.store.dto.ProductDto;
 
 public interface ProductService {
-    List<ProductDto> getAllProducts();
+    List<ProductDto> getAllProducts(String search);
 
     void insertProducts();
 }

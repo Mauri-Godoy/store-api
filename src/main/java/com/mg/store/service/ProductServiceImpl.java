@@ -17,11 +17,16 @@ public class ProductServiceImpl implements ProductService {
         @Autowired
         private ProductRepository productRepository;
 
+        private List<ProductDto> toDtoList(List<Product> products) {
+                return products.stream().map(product -> ProductMapper.INSTANCE.tDto(product)).toList();
+        }
+
         @Override
-        public List<ProductDto> getAllProducts() {
-                return productRepository.findAll().stream()
-                                .map(product -> ProductMapper.INSTANCE.tDto(product))
-                                .toList();
+        public List<ProductDto> getAllProducts(String search) {
+                if (search == null || search.trim().isEmpty()) {
+                        return toDtoList(productRepository.findAll());
+                }
+                return toDtoList(productRepository.searchByNameOrDescription(search));
         }
 
         @Override
