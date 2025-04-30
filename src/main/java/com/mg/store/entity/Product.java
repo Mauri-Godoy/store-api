@@ -25,7 +25,7 @@ public class Product {
     @Column(nullable = false)
     private double price;
     @Column(nullable = false)
-    private int quantity;
+    private int stock;
     @Column(nullable = false)
     private String category;
     private String imageUrl;

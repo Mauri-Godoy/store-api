@@ -1,0 +1,52 @@
+package com.mg.store.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mg.store.config.ConflictException;
+import com.mg.store.dto.CartDto;
+import com.mg.store.entity.Cart;
+import com.mg.store.entity.CartProduct;
+import com.mg.store.repository.CartProductRepository;
+import com.mg.store.repository.CartRepository;
+
+@Service
+public class CartServiceImpl implements CartService {
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartProductRepository cartProductRepository;
+
+    @Autowired
+    private ProductService productService;
+
+    @Override
+    public CartDto createCart(CartDto cartDto) {
+        Cart cart = new Cart();
+        cartRepository.save(cart);
+        createCartProducts(cart, cartDto);
+        return cartDto;
+    }
+
+    private void createCartProducts(Cart cart, CartDto cartDto) {
+        if (cartDto.getProducts() == null || cartDto.getProducts().isEmpty()) {
+            throw new ConflictException("No se ingresaron productos en el carrito.");
+        }
+
+        List<CartProduct> cartProducts = new ArrayList<>();
+        cartDto.getProducts().forEach(cProductDto -> {
+            CartProduct cartProduct = new CartProduct();
+            cartProduct.setCart(cart);
+            cartProduct.setPrice(cProductDto.getPrice());
+            cartProduct.setQuantity(cProductDto.getQuantity());
+            cartProduct.setProduct(productService.getById(cProductDto.getProduct().getId()));
+            cartProducts.add(cartProduct);
+        });
+        cartProductRepository.saveAll(cartProducts);
+    }
+}

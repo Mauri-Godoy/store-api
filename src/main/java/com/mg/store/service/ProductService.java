@@ -3,9 +3,12 @@ package com.mg.store.service;
 import java.util.List;
 
 import com.mg.store.dto.ProductDto;
+import com.mg.store.entity.Product;
 
 public interface ProductService {
     List<ProductDto> getAllProducts(String search);
 
     void insertProducts();
+
+    Product getById(Integer id);
 }
