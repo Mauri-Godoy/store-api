@@ -1,5 +1,6 @@
 package com.mg.store.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Data;
@@ -8,5 +9,6 @@ import lombok.Data;
 public class CartDto {
 
     private Integer id;
-    private List<CartProductDto> products;
+    private LocalDateTime createdAt;
+    private List<CartProductDto> cartProducts;
 }

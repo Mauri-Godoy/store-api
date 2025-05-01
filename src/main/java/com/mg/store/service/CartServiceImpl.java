@@ -10,6 +10,8 @@ import com.mg.store.config.ConflictException;
 import com.mg.store.dto.CartDto;
 import com.mg.store.entity.Cart;
 import com.mg.store.entity.CartProduct;
+import com.mg.store.mapper.CartMapper;
+import com.mg.store.mapper.CartProductMapper;
 import com.mg.store.repository.CartProductRepository;
 import com.mg.store.repository.CartRepository;
 
@@ -34,12 +36,12 @@ public class CartServiceImpl implements CartService {
     }
 
     private void createCartProducts(Cart cart, CartDto cartDto) {
-        if (cartDto.getProducts() == null || cartDto.getProducts().isEmpty()) {
+        if (cartDto.getCartProducts() == null || cartDto.getCartProducts().isEmpty()) {
             throw new ConflictException("No se ingresaron productos en el carrito.");
         }
 
         List<CartProduct> cartProducts = new ArrayList<>();
-        cartDto.getProducts().forEach(cProductDto -> {
+        cartDto.getCartProducts().forEach(cProductDto -> {
             CartProduct cartProduct = new CartProduct();
             cartProduct.setCart(cart);
             cartProduct.setPrice(cProductDto.getPrice());
@@ -48,5 +50,24 @@ public class CartServiceImpl implements CartService {
             cartProducts.add(cartProduct);
         });
         cartProductRepository.saveAll(cartProducts);
+    }
+
+    @Override
+    public List<CartDto> getAllCarts() {
+        List<Cart> carts = cartRepository.findAll();
+        List<CartDto> cartDtos = CartMapper.INSTANCE.toDto(carts);
+
+        List<CartProduct> cartProducts = cartProductRepository.findAll();
+        cartDtos.forEach(cartDto -> {
+            List<CartProduct> products = new ArrayList<>();
+            cartProducts.forEach(cartProduct -> {
+                if (cartProduct.getCart().getId() == cartDto.getId()) {
+                    products.add(cartProduct);
+                }
+            });
+            cartDto.setCartProducts(CartProductMapper.INSTANCE.toDto(products));
+        });
+
+        return cartDtos;
     }
 }

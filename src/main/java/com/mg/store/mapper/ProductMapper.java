@@ -1,5 +1,7 @@
 package com.mg.store.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -11,5 +13,8 @@ public interface ProductMapper {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    ProductDto tDto(Product entity);
+    ProductDto toDto(Product entity);
+
+    List<ProductDto> toDto(List<Product> entities);
+
 }
