@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-StoreApplication<store>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mg.store.StoreApplication",
+            "projectName": "store",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "console": "internalConsole"
+        }
+    ],
+}

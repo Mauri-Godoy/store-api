@@ -46,6 +46,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader(org.springframework.http.HttpHeaders.AUTHORIZATION);
 
+        final String requestPath = request.getServletPath();
+
+        logger.info("Request path: {}", requestPath);
+
+        if (requestPath.contains("/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             logger.warn("No se ingresó el token de autorización.");
         } else {
