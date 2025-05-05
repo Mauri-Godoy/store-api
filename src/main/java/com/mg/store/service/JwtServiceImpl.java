@@ -7,7 +7,7 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.mg.store.dto.UserDto;
+import com.mg.store.entity.User;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -23,15 +23,15 @@ public class JwtServiceImpl implements JwtService {
     @Value("${jwt.refresh-token.expiration}")
     private long refreshTokenExpirationTime;
 
-    public String generateToken(final UserDto user) {
+    public String generateToken(final User user) {
         return buildToken(user, expirationTime);
     }
 
-    public String generateRefreshToken(final UserDto user) {
+    public String generateRefreshToken(final User user) {
         return buildToken(user, refreshTokenExpirationTime);
     }
 
-    private String buildToken(UserDto user, long expirationTime) {
+    private String buildToken(User user, long expirationTime) {
         // Lógica para construir el token JWT
         return Jwts.builder()
                 .id(user.getId().toString())
@@ -69,7 +69,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public boolean isTokenValid(String token, UserDto user) {
+    public boolean isTokenValid(String token, User user) {
         String username = extractUsername(token);
         return (username.equals(user.getUsername()) && !isTokenExpired(token));
     }

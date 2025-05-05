@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.mg.store.dto.UserDto;
+import com.mg.store.entity.User;
 import com.mg.store.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class AuthConfig {
     @Bean
     UserDetailsService userDetailsService() {
         return username -> {
-            final UserDto user = userService.getByUserName(username);
+            final User user = userService.getByUserName(username);
             return org.springframework.security.core.userdetails.User.builder()
                     .username(user.getUsername())
                     .password(user.getPassword())

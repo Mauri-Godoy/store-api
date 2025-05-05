@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.mg.store.dto.UserDto;
+import com.mg.store.entity.User;
 import com.mg.store.service.JwtService;
 import com.mg.store.service.UserService;
 
@@ -63,7 +63,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
                 logger.warn("Usuario no encontrado.");
             }
-            UserDto user = userService.getByUserName(username);
+            User user = userService.getByUserName(username);
 
             if (!jwtService.isTokenValid(jwt, user)) {
                 logger.warn("Token válido o expirado");

@@ -19,7 +19,7 @@ public class WebConfig {
                 registry.addMapping("/**") // todos los endpoints
                         .allowedOrigins("http://localhost:4300", "http://localhost:4200") // permitir el frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // métodos HTTP permitidos
-                        .allowedHeaders("*") // permitir todos los headers
+                        .allowedHeaders("Authorization", "Content-Type") // permitir todos los headers
                         .allowCredentials(true); // si usás cookies o auth
             }
         };

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.mg.store.dto.TokenDto;
 import com.mg.store.dto.UserDto;
+import com.mg.store.entity.User;
+import com.mg.store.mapper.UserMapper;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -32,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenDto login(UserDto userDto) {
-        final UserDto user = userService.getByUserName(userDto.getUsername());
+        final User user = userService.getByUserName(userDto.getUsername());
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
         String token = jwtService.generateToken(user);
@@ -40,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
         TokenDto tokenDto = new TokenDto();
         tokenDto.setToken(token);
         tokenDto.setRefreshToken(refreshToken);
-        tokenDto.setUser(user);
+        tokenDto.setUser(UserMapper.INSTANCE.toDto(user));
         return tokenDto;
     }
 }

@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByUserName(String username) {
-        return UserMapper.INSTANCE.toDto(userRepository.findByUsername(username)
-                .orElseThrow(() -> new ConflictException("El usuario no existe.")));
+    public User getByUserName(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ConflictException("El usuario no existe."));
     }
 
 }
