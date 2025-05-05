@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.mg.store.dto.TokenDto;
 import com.mg.store.dto.UserDto;
-import com.mg.store.entity.User;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -26,20 +25,14 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public TokenDto register(UserDto userDto) {
+    public UserDto register(UserDto userDto) {
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        User user = userService.createUser(userDto);
-        String token = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
-        TokenDto tokenDto = new TokenDto();
-        tokenDto.setToken(token);
-        tokenDto.setRefreshToken(refreshToken);
-        return tokenDto;
+        return userService.createUser(userDto);
     }
 
     @Override
     public TokenDto login(UserDto userDto) {
-        final User user = userService.getByUserName(userDto.getUsername());
+        final UserDto user = userService.getByUserName(userDto.getUsername());
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
         String token = jwtService.generateToken(user);
@@ -47,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
         TokenDto tokenDto = new TokenDto();
         tokenDto.setToken(token);
         tokenDto.setRefreshToken(refreshToken);
+        tokenDto.setUser(user);
         return tokenDto;
     }
 }

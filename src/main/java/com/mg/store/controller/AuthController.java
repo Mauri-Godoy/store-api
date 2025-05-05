@@ -18,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public TokenDto register(@RequestBody UserDto userDto) {
+    public UserDto register(@RequestBody UserDto userDto) {
         return authService.register(userDto);
     }
 

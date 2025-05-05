@@ -39,6 +39,10 @@
     {
       "command": "clean compile package",
       "debug": false
+    },
+    {
+      "command": "clean install",
+      "debug": false
     }
   ],
   "editor.codeActionsOnSave": {

@@ -5,7 +5,7 @@ import com.mg.store.dto.UserDto;
 
 public interface AuthService {
 
-    public TokenDto register(UserDto userDto);
+    public UserDto register(UserDto userDto);
 
     public TokenDto login(UserDto userDto);
 }

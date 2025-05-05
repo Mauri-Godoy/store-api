@@ -1,14 +1,14 @@
 package com.mg.store.service;
 
-import com.mg.store.entity.User;
+import com.mg.store.dto.UserDto;
 
 public interface JwtService {
 
-    public String generateToken(User user);
+    public String generateToken(UserDto user);
 
-    public String generateRefreshToken(User user);
+    public String generateRefreshToken(UserDto user);
 
     public String extractUsername(String token);
 
-    public boolean isTokenValid(String token, User user);
+    public boolean isTokenValid(String token, UserDto user);
 }
