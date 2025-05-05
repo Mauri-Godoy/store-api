@@ -7,9 +7,9 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.mg.store.StoreApplication",
             "projectName": "store",
-            "args": "--spring.output.ansi.enabled=always",
             "envFile": "${workspaceFolder}/.env",
-            "console": "internalConsole"
+            "console": "internalConsole",
+            "args": "--spring.output.ansi.enabled=always",
         }
     ],
 }
