@@ -34,6 +34,11 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
+        public ProductDto getDtoById(Integer id) {
+                return ProductMapper.INSTANCE.toDto(getById(id));
+        }
+
+        @Override
         public void insertProducts() {
                 Product product1 = new Product(null, "Piedra Filosofal",
                                 "Una piedra ancestral, fuente de sabiduría eterna y energía mística. Ideal para decoración zen o rituales secretos.",

@@ -11,4 +11,6 @@ public interface ProductService {
     void insertProducts();
 
     Product getById(Integer id);
+
+    ProductDto getDtoById(Integer id);
 }
