@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mg.store.config.ConflictException;
+import com.mg.store.config.exception.ConflictException;
 import com.mg.store.dto.CartDto;
 import com.mg.store.entity.Cart;
 import com.mg.store.entity.CartProduct;

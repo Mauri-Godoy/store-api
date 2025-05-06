@@ -3,7 +3,7 @@ package com.mg.store.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mg.store.config.ConflictException;
+import com.mg.store.config.exception.UnauthorizedException;
 import com.mg.store.dto.UserDto;
 import com.mg.store.entity.User;
 import com.mg.store.mapper.UserMapper;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByUserName(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new ConflictException("El usuario no existe."));
+                .orElseThrow(() -> new UnauthorizedException("El usuario no existe."));
     }
 
 }

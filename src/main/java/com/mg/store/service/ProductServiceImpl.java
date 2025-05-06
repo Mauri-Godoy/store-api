@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mg.store.config.ConflictException;
+import com.mg.store.config.exception.ConflictException;
 import com.mg.store.dto.ProductDto;
 import com.mg.store.entity.Product;
 import com.mg.store.mapper.ProductMapper;
@@ -29,7 +29,8 @@ public class ProductServiceImpl implements ProductService {
         @Override
         public Product getById(Integer id) {
                 return productRepository.findById(id)
-                                .orElseThrow(() -> new ConflictException("No se encontró el producto con id: " + id));
+                                .orElseThrow(() -> new ConflictException(
+                                                "No se encontró el producto con id: " + id));
         }
 
         @Override
