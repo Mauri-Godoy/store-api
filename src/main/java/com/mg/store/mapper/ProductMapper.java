@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 import com.mg.store.dto.ProductDto;
 import com.mg.store.entity.Product;
 
-@Mapper
+@Mapper(uses = CategoryMapper.class)
 public interface ProductMapper {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);

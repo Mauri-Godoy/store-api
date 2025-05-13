@@ -6,7 +6,7 @@ import com.mg.store.dto.ProductDto;
 import com.mg.store.entity.Product;
 
 public interface ProductService {
-    List<ProductDto> getAllProducts(String search);
+    List<ProductDto> getAllProducts(String search, Integer categoryId);
 
     void insertProducts();
 

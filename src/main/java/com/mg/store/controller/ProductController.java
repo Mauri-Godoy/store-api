@@ -19,8 +19,9 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping()
-    public List<ProductDto> getAllProducts(@RequestParam(required = false) String search) {
-        return productService.getAllProducts(search);
+    public List<ProductDto> getAllProducts(@RequestParam(required = false, defaultValue = "") String search,
+            @RequestParam(required = false) Integer categoryId) {
+        return productService.getAllProducts(search, categoryId);
     }
 
     @GetMapping("/{id}")
