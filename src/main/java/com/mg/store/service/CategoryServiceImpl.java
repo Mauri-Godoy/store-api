@@ -3,6 +3,7 @@ package com.mg.store.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.mg.store.dto.CategoryDto;
@@ -24,6 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable("categories")
     public List<CategoryDto> getAll() {
         return CategoryMapper.INSTANCE.toDto(categoryRepository.findAll());
     }

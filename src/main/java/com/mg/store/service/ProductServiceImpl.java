@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.mg.store.config.exception.ConflictException;
@@ -23,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
         private CategoryService categoryService;
 
         @Override
+        @Cacheable(value = "products", key = "#search + '-' + #categoryId", unless = "#result == null")
         public List<ProductDto> getAllProducts(String search, Integer categoryId) {
                 if (search == null && categoryId == null) {
                         return ProductMapper.INSTANCE.toDto(productRepository.findAll());
@@ -33,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
+        @Cacheable(value = "product", key = "#id", unless = "#result == null")
         public Product getById(Integer id) {
                 return productRepository.findById(id)
                                 .orElseThrow(() -> new ConflictException(
@@ -40,11 +44,13 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
+        @Cacheable(value = "productDto", key = "#id", unless = "#result == null")
         public ProductDto getDtoById(Integer id) {
                 return ProductMapper.INSTANCE.toDto(getById(id));
         }
 
         @Override
+        @CacheEvict(value = { "products", "product", "productDto" }, allEntries = true)
         public void insertProducts() {
                 Category category1 = categoryService.create("Reliquias");
                 Category category2 = categoryService.create("Objetos Místicos");
