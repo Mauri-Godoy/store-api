@@ -26,9 +26,14 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SmptService smtpService;
+
     @Override
     public UserDto register(UserDto userDto) {
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        smtpService.sendEmail(userDto.getEmail(), "Bienvenido a la tienda",
+                "Gracias por registrarte en nuestra tienda");
         return userService.createUser(userDto);
     }
 

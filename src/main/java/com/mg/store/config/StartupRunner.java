@@ -24,7 +24,7 @@ public class StartupRunner implements CommandLineRunner {
 
         System.out.println("Insertando usuario de prueba");
         UserDto user = new UserDto();
-        user.setEmail("test@gmail.com");
+        user.setEmail("mauu.godoy01@gmail.com");
         user.setUsername("test");
         user.setPassword("1234");
         authService.register(user);
