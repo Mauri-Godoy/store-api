@@ -10,6 +10,7 @@ import com.mg.store.config.exception.ConflictException;
 import com.mg.store.dto.CartDto;
 import com.mg.store.entity.Cart;
 import com.mg.store.entity.CartProduct;
+import com.mg.store.entity.User;
 import com.mg.store.mapper.CartMapper;
 import com.mg.store.mapper.CartProductMapper;
 import com.mg.store.repository.CartProductRepository;
@@ -28,8 +29,9 @@ public class CartServiceImpl implements CartService {
     private ProductService productService;
 
     @Override
-    public CartDto createCart(CartDto cartDto) {
+    public CartDto createCart(CartDto cartDto, User user) {
         Cart cart = new Cart();
+        cart.setUser(user);
         cartRepository.save(cart);
         createCartProducts(cart, cartDto);
         return cartDto;
@@ -53,11 +55,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartDto> getAllCarts() {
-        List<Cart> carts = cartRepository.findAll();
+    public List<CartDto> getByUser(User user) {
+        List<Cart> carts = cartRepository.findByUser(user);
         List<CartDto> cartDtos = CartMapper.INSTANCE.toDto(carts);
 
-        List<CartProduct> cartProducts = cartProductRepository.findAll();
+        List<CartProduct> cartProducts = cartProductRepository.findByCartUser(user);
         cartDtos.forEach(cartDto -> {
             List<CartProduct> products = new ArrayList<>();
             cartProducts.forEach(cartProduct -> {

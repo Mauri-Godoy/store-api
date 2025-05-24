@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mg.store.config.annotation.CurrentUser;
 import com.mg.store.dto.CartDto;
+import com.mg.store.entity.User;
 import com.mg.store.service.CartService;
 
 @RestController
@@ -20,13 +22,13 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("")
-    public CartDto createCart(@RequestBody CartDto dto) {
-        return cartService.createCart(dto);
+    public CartDto createCart(@RequestBody CartDto dto, @CurrentUser User user) {
+        return cartService.createCart(dto, user);
     }
 
     @GetMapping("")
-    public List<CartDto> getAll() {
-        return cartService.getAllCarts();
+    public List<CartDto> getByUser(@CurrentUser User user) {
+        return cartService.getByUser(user);
     }
 
 }

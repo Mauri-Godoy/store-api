@@ -28,5 +28,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UnauthorizedException("El usuario no existe."));
     }
-
 }
