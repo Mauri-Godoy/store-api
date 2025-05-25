@@ -11,4 +11,5 @@ public class CartDto {
     private Integer id;
     private LocalDateTime createdAt;
     private List<CartProductDto> cartProducts;
+    private double total;
 }

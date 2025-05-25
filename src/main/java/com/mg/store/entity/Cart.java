@@ -32,4 +32,6 @@ public class Cart {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private User user;
+
+    private double total;
 }

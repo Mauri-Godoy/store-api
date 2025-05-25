@@ -33,11 +33,13 @@ public class CartServiceImpl implements CartService {
         Cart cart = new Cart();
         cart.setUser(user);
         cartRepository.save(cart);
-        createCartProducts(cart, cartDto);
+        double total = createCartProducts(cart, cartDto);
+        cart.setTotal(total);
+        cartRepository.save(cart);
         return cartDto;
     }
 
-    private void createCartProducts(Cart cart, CartDto cartDto) {
+    private double createCartProducts(Cart cart, CartDto cartDto) {
         if (cartDto.getCartProducts() == null || cartDto.getCartProducts().isEmpty()) {
             throw new ConflictException("No se ingresaron productos en el carrito.");
         }
@@ -52,6 +54,8 @@ public class CartServiceImpl implements CartService {
             cartProducts.add(cartProduct);
         });
         cartProductRepository.saveAll(cartProducts);
+
+        return cartProducts.stream().mapToDouble(CartProduct::getPrice).sum();
     }
 
     @Override
